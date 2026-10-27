@@ -452,8 +452,35 @@ input:focus, textarea:focus, select:focus {
 .tracking-map {
   border: 0;
   width: 100%;
+  height: 320px;
   min-height: 260px;
   border-radius: 18px;
+  overflow: hidden;
+}
+
+.tracking-note {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0 0 12px;
+}
+
+.tracking-list strong {
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.brand-tagline {
+  display: block;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.brand:link,
+.brand:visited {
+  color: inherit;
+  text-decoration: none;
 }
 
 .status-pill {
@@ -789,6 +816,10 @@ input:focus, textarea:focus, select:focus {
   .nav {
     flex-wrap: wrap;
     justify-content: center;
+  }
+
+  .tracking-grid {
+    grid-template-columns: 1fr;
   }
 
   .section-title {

@@ -5,44 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FreshCart | Tracking</title>
   <link rel="stylesheet" href="pr.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
-  <div class="tracking-page">
+  <header class="topbar">
+    <a class="brand" href="index.html?view=home" aria-label="FreshCart home">
+      <span class="brand-badge">F</span>
+      <span>
+        <strong>FreshCart</strong>
+        <span class="brand-tagline">Fresh, healthy, fast</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="index.html?view=home" class="nav-btn">Home</a>
+      <a href="index.html?view=products" class="nav-btn">Products</a>
+      <a href="index.html?view=cart" class="nav-btn">Cart</a>
+      <a href="index.html?view=checkout" class="nav-btn">Checkout</a>
+      <a href="tracking.html" class="nav-btn active" aria-current="page">Tracking</a>
+    </nav>
+  </header>
+
+  <main class="tracking-page">
     <div class="tracking-container">
       <div class="tracking-header">
         <div>
-          <p class="badge">Live Delivery Tracking</p>
-          <h2>Order #FC-1024</h2>
+          <p class="badge">Delivery Tracking</p>
+          <h2>Your latest order</h2>
         </div>
-        <a href="index.html?view=home" class="btn secondary-btn">Back to Home</a>
       </div>
 
       <section class="tracking-card">
         <div class="tracking-status">
-          <span class="status-pill">On the way</span>
-          <h1>Your juice order is arriving soon</h1>
-          <p>Estimated arrival: July 24, 2026 at 6:20 PM</p>
+          <span class="status-pill">Order placed</span>
+          <h1>Your delivery details</h1>
+          <p>Estimated delivery: <strong>30–45 minutes</strong></p>
         </div>
 
         <div class="tracking-grid">
           <div class="tracking-panel">
-            <h3>Tracking Details</h3>
+            <h3>Delivery Details</h3>
             <ul class="tracking-list">
-              <li><span>Order placed</span><strong>July 23, 2026</strong></li>
-              <li><span>Packed</span><strong>2:30 PM</strong></li>
-              <li><span>Out for delivery</span><strong>4:10 PM</strong></li>
-              <li><span>Current location</span><strong>Near Kadapa Hub</strong></li>
-              <li><span>Delivery person</span><strong>Ravi Kumar</strong></li>
+              <li><span>Customer</span><strong id="customerName">Complete checkout to add your details</strong></li>
+              <li><span>Delivery address</span><strong id="deliveryAddress">Not provided</strong></li>
+              <li><span>Phone number</span><strong id="customerPhone">Not provided</strong></li>
+              <li><span>Estimated delivery</span><strong>30–45 minutes</strong></li>
             </ul>
+            <p class="tracking-note">Customer details are shown from your most recent checkout on this device.</p>
           </div>
 
           <div class="tracking-panel">
-            <h3>Map & Route</h3>
-            <iframe class="tracking-map" src="https://www.google.com/maps?q=Kadapa,Andhra%20Pradesh&output=embed"></iframe>
+            <h3>Delivery Route</h3>
+            <p class="tracking-note">Sample route near Kadapa. Live courier GPS is not connected.</p>
+            <div id="trackingMap" class="tracking-map" role="application" aria-label="Map showing the sample delivery route and courier location"></div>
+            <p id="mapStatus" class="tracking-note" role="status">Loading delivery map…</p>
           </div>
         </div>
       </section>
     </div>
-  </div>
+  </main>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="tracking.js"></script>
 </body>
 </html>

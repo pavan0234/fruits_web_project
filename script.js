@@ -425,11 +425,11 @@ function bindEvents() {
 
   document.querySelectorAll(".nav-btn, .hero-actions button, [data-view]").forEach(button => {
     button.addEventListener("click", (e) => {
-      e.preventDefault();
       const viewName = button.dataset.view;
-      if (viewName) {
-        showView(viewName);
-      }
+      if (!viewName) return;
+
+      e.preventDefault();
+      showView(viewName);
     });
   });
 
@@ -501,6 +501,12 @@ function bindEvents() {
 
     const formData = new FormData(elements.checkoutForm);
     const name = formData.get("name") || "Customer";
+
+    localStorage.setItem("freshCartLastOrder", JSON.stringify({
+      name,
+      phone: formData.get("phone"),
+      address: formData.get("address")
+    }));
 
     elements.orderMessage.className = "message success";
     elements.orderMessage.textContent = `Thank you, ${name}! Your order has been placed successfully.`;
