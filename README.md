@@ -10,3 +10,7 @@ A simple juice store web app with login, products, cart, checkout, support, and 
 
 ## Run locally
 Open index.html in your browser.
+
+# Fruits Web Project
+
+Check out the live website here: [Fruits Web Project Live](https://pavan0234.github.io/fruits_web_project/)
