@@ -134,13 +134,14 @@
           <input type="email" name="email" placeholder="Your Email" required />
           <input type="text" name="phone" placeholder="Phone Number" required />
           <textarea name="address" rows="3" placeholder="Delivery Address" required></textarea>
-          <select name="payment" required>
+          <select id="paymentMethod" name="payment" required>
             <option value="">Choose Payment</option>
             <option value="Card">Card</option>
             <option value="UPI">UPI</option>
             <option value="Cash on Delivery">Cash on Delivery</option>
           </select>
-          <button type="submit" class="btn primary-btn full-btn">Place Order</button>
+          <p id="paymentInfo" class="payment-info" role="status" hidden></p>
+          <button type="submit" class="btn primary-btn full-btn">Place Order / Continue to Payment</button>
           <p id="orderMessage" class="message"></p>
         </form>
       </section>

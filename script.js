@@ -82,6 +82,8 @@ const elements = {
   cartSummary: document.getElementById("cartSummary"),
   checkoutForm: document.getElementById("checkoutForm"),
   orderMessage: document.getElementById("orderMessage"),
+  paymentMethod: document.getElementById("paymentMethod"),
+  paymentInfo: document.getElementById("paymentInfo"),
   toast: document.getElementById("toast"),
   addedItemsList: document.getElementById("addedItemsList"),
   cartBadge: document.getElementById("cartBadge"),
@@ -489,6 +491,18 @@ function bindEvents() {
     }
   });
 
+  elements.paymentMethod.addEventListener("change", () => {
+    const paymentGuidance = {
+      Card: "Card payments will use Stripe Checkout. This demo has no payment server connected yet, so no card details are requested or charged.",
+      UPI: "UPI payments will use Stripe Checkout. This demo has no payment server connected yet, so no UPI ID or PIN is requested or charged.",
+      "Cash on Delivery": "Pay the delivery partner when your order arrives."
+    };
+    const guidance = paymentGuidance[elements.paymentMethod.value];
+    elements.paymentInfo.textContent = guidance || "";
+    elements.paymentInfo.hidden = !guidance;
+    elements.orderMessage.textContent = "";
+  });
+
   elements.checkoutForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -501,6 +515,13 @@ function bindEvents() {
 
     const formData = new FormData(elements.checkoutForm);
     const name = formData.get("name") || "Customer";
+    const paymentMethod = formData.get("payment");
+
+    if (paymentMethod !== "Cash on Delivery") {
+      elements.orderMessage.className = "message error";
+      elements.orderMessage.textContent = "Secure card and UPI checkout is not connected yet. No payment was taken. Choose Cash on Delivery or connect a Stripe backend.";
+      return;
+    }
 
     localStorage.setItem("freshCartLastOrder", JSON.stringify({
       name,
@@ -509,7 +530,7 @@ function bindEvents() {
     }));
 
     elements.orderMessage.className = "message success";
-    elements.orderMessage.textContent = `Thank you, ${name}! Your order has been placed successfully.`;
+    elements.orderMessage.textContent = `Thank you, ${name}! Your order has been placed. Pay the delivery partner when it arrives.`;
 
     cart = [];
     recentAdds = [];
@@ -517,6 +538,7 @@ function bindEvents() {
     renderCart();
     renderAddedItems();
     elements.checkoutForm.reset();
+    elements.paymentInfo.hidden = true;
     showToast("Order placed successfully");
   });
 }
